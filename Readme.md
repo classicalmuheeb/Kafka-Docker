@@ -14,15 +14,18 @@ Fake personal information is generated using [Mimesis](https://mimesis.name/en/m
 3. Install dependencies: `pip install -r requirements.txt`
 
 ## Usage
-To run the application, follow the following steps:
-1. Start Docker   
-2. The Elastic-Logstash-Kibana pipeline is managed using docker compose and must also be started. To start them, ensure Docker is run and execute the following in the terminal
-     #!/bin/bash
-    docker compose -f zookeeper_docker.yaml up -d
+### To run the application, follow these steps:
+1. Start Docker on your system if it's not already running.
 
-    docker compose -f elastic_docker.yaml up -d
+2. The Elastic-Logstash-Kibana pipeline is managed using Docker Compose and must also be started. To do this, follow these commands:
+
+   ```bash
+   #!/bin/bash
+   docker-compose -f zookeeper_docker.yaml up -d
+
+   docker-compose -f elastic_docker.yaml up -d
 3. Execute the following command: `python main.py`
 
-![Screenshot](screenshot/consumer.jpg)
+![Screenshot](screenshot/dashboard.jpg)
 
 ![Screenshot](screenshot/MongoDB.jpg)
