@@ -26,6 +26,6 @@ Fake personal information is generated using [Mimesis](https://mimesis.name/en/m
    docker-compose -f elastic_docker.yaml up -d
 3. Execute the following command: `python main.py`
 
-![Screenshot](screenshot/consumer.jpg)
+![Screenshot](screenshot/dashboard.jpg)
 
 ![Screenshot](screenshot/MongoDB.jpg)
