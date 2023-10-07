@@ -1,0 +1,3 @@
+mimesis==20.1.1
+pymongo
+kafka-python

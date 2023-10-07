@@ -1,0 +1,7 @@
+- pipeline.id: logstash_kafka_people_info
+  path.config: "/usr/share/logstash/pipeline/logstash_kafka_people_info.conf"
+  pipeline.workers: 3
+- pipeline.id: logstash_kafka_pipeline
+  path.config: "/usr/share/logstash/pipeline/logstash_kafka_pipeline.conf"
+  queue.type: persisted
+

@@ -1,0 +1,74 @@
+version: '3.7'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - node.name=kafka-node
+      - cluster.name=kafka-cluster
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - elasticsearch-data-volume:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300 
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.10.2
+    restart: always
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    container_name: logstash
+    image: logstash:8.10.2
+    environment:
+
+      LS_JAVA_OPTS: -Xms256m -Xmx256m  
+    ports:
+      - '5040:5040'
+    volumes:
+     #-- ./logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+     #- ./logstash_kafka_pipeline2.conf:/usr/share/pipeline/logstash_kafka_pipeline2.conf:ro
+      - type: bind
+        source: ./logstash/pipeline/
+        target: /usr/share/logstash/pipeline/
+        read_only: true
+      - type: bind
+        source: ./logstash/pipeline/pipelines.yml
+        target: /opt/logstash/config/pipelines.yml
+        read_only: true
+    depends_on:
+    - elasticsearch
+    restart: always
+    tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "50"
+    healthcheck:
+      test: ["CMD", "curl", "--silent", "--fail", "http://logstash:9600"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+    #command: bash -c "cp .C:/Users/Muheeb/Desktop/Kafka-Docker/logstash_kafka_pipeline.conf /usr/share/logstash/pipeline/"
+volumes:
+  elasticsearch-data-volume:
+    driver: local
