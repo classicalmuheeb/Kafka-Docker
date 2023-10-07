@@ -1,4 +1,4 @@
-#Kafka-Elastic-Logstash-Kibana-MongoDB Data Pipeline
+## Kafka-Elastic-Logstash-Kibana-MongoDB Data Pipeline
 This repository contain logics of a data pipeline using Kafka and the ELK stack. 
 
 Fake personal information is generated using [Mimesis](https://mimesis.name/en/master/api.html#api-reference) a Python module for producing fake data. The underneath procedure is used to manage data: 
@@ -20,7 +20,6 @@ Fake personal information is generated using [Mimesis](https://mimesis.name/en/m
 2. The Elastic-Logstash-Kibana pipeline is managed using Docker Compose and must also be started. To do this, follow these commands:
 
    ```bash
-   #!/bin/bash
    docker-compose -f zookeeper_docker.yaml up -d
 
    docker-compose -f elastic_docker.yaml up -d
