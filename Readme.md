@@ -9,7 +9,7 @@ Fake personal information is generated using [Mimesis](https://mimesis.name/en/m
 5. Kibana turns this data into a concrete visualization. 
 
 ## Installation
-1. Clone the repository: `git clone https://github.com/classicalmuheeb/Kafka_Python_MongoDB`
+1. Clone the repository: `git clone https://github.com/classicalmuheeb/Kafka_Python_MongoDB_ELK`
 2. Navigate to the project directory. 
 3. Install dependencies: `pip install -r requirements.txt`
 
